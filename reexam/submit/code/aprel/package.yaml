@@ -1,0 +1,50 @@
+name: aprel
+
+# The packages we (may) depend on
+dependencies:
+  - base             # For built-in functions like `length`
+  - containers       # For Data.Set, etc.
+  - mtl              # Some standard monads, if needed
+  - text             # For Data.Text, if needed
+  - parsec           # If needed; ReadP is already part of base
+  # Don't add anything else here!
+
+# The APREL libraries
+library:
+  source-dirs: src
+  ghc-options:
+    - -W
+  exposed-modules:
+    - AST
+    - Parser
+    - Matcher
+  other-modules:
+    - ParserImpl
+    - MatcherImpl
+
+executable:
+  main: Main.hs
+  source-dirs:
+    - app
+  dependencies:
+    - aprel
+
+# Test suites
+tests:
+  primary-test-suite:
+    main: BlackBox.hs
+    source-dirs: tests
+    dependencies: # not all may be relevant
+      - aprel
+      - tasty
+      - tasty-hunit
+      - QuickCheck
+      - tasty-quickcheck
+      # Don't add anything else here
+#  other-test-suite1:  # currently a no-op; uncomment if needed
+#    main: WhiteBox.hs
+#    source-dirs: [tests/suite1, src]
+#    dependencies: # not all may be relevant
+#      - tasty
+#      - tasty-hunit
+#      # Whatever else you need from the course LTS version

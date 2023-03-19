@@ -1,0 +1,63 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.34.4.
+--
+-- see: https://github.com/sol/hpack
+
+name:           aprel
+version:        0.0.0
+build-type:     Simple
+
+library
+  exposed-modules:
+      AST
+      Parser
+      Matcher
+  other-modules:
+      ParserImpl
+      MatcherImpl
+  hs-source-dirs:
+      src
+  ghc-options: -W
+  build-depends:
+      base
+    , containers
+    , mtl
+    , parsec
+    , text
+  default-language: Haskell2010
+
+executable aprel
+  main-is: Main.hs
+  other-modules:
+      Paths_aprel
+  hs-source-dirs:
+      app
+  build-depends:
+      aprel
+    , base
+    , containers
+    , mtl
+    , parsec
+    , text
+  default-language: Haskell2010
+
+test-suite primary-test-suite
+  type: exitcode-stdio-1.0
+  main-is: BlackBox.hs
+  other-modules:
+      Paths_aprel
+  hs-source-dirs:
+      tests
+  build-depends:
+      QuickCheck
+    , aprel
+    , base
+    , containers
+    , mtl
+    , parsec
+    , tasty
+    , tasty-hunit
+    , tasty-quickcheck
+    , text
+  default-language: Haskell2010
